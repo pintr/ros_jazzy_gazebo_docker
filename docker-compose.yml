@@ -1,0 +1,27 @@
+services:
+  ros_jazzy_env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: "host"
+    ipc: "host"
+    devices:
+      # Share the host's graphics devices with the container
+      - /dev/dri:/dev/dri
+    environment:
+      - DISPLAY=$DISPLAY
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./src:/root/ros2_ws/src:rw
+    stdin_open: true
+    tty: true
+
+    # --- UNCOMMENT THE FOLLOWING FOR NVIDIA GPU ACCELERATION ---
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu, utility, graphics, display]
