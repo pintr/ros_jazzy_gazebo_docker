@@ -15,8 +15,8 @@ docker compose up --build -d --wait
 # Check if the container is running
 if docker compose ps | grep -q "Up"; then
     echo "Container is running successfully!"
-    docker compose exec ros_dev_env bash
+    docker compose exec ros_jazzy_env bash
 else
     echo "Container failed to start. Checking logs..."
-    docker compose logs ros_dev_env
+    docker compose logs ros_jazzy_env
 fi
